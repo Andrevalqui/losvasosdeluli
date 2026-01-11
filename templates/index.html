@@ -2,187 +2,167 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
-    <!-- Añadimos Swiper para la Galería -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         :root {
-            --color-pink-hot: #ff2d91;    /* Rosa fuerte de tu tarjeta */
-            --color-pink-soft: #fff0f6;   /* Fondo rosa pastel */
-            --color-chocolate: #4e2c1c;   /* Marrón chocolate del logo */
+            --color-pink-hot: #ff2d91;
+            --color-pink-soft: #fff0f6;
+            --color-chocolate: #4e2c1c;
         }
         
         body { 
             font-family: 'Poppins', sans-serif; 
+            background-color: var(--color-pink-soft); 
             color: var(--color-chocolate); 
-            background-color: var(--color-pink-soft);
             margin: 0;
-            overflow-x: hidden;
         }
 
-        /* SPLASH SCREEN */
-        .splash-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background-color: var(--color-pink-soft); z-index: 9999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 1s ease-out, visibility 1s ease-out;
-        }
-        .splash-hidden { opacity: 0; visibility: hidden; }
-        .splash-title { font-family: 'Great Vibes', cursive; font-size: 5rem; color: var(--color-pink-hot); }
-
-        /* HERO SECTION */
+        /* HERO AJUSTADO (MÁS EQUILIBRADO) */
         .hero-section {
-            position: relative; height: 100vh; display: flex;
-            justify-content: center; align-items: center; overflow: hidden;
+            position: relative;
+            height: 85vh; /* No ocupa toda la pantalla para que se vea el contenido abajo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
         }
         .back-video {
-            position: absolute; min-width: 100%; min-height: 100%;
+            position: absolute; width: 100%; height: 100%;
             z-index: -1; object-fit: cover;
         }
         .overlay { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(0deg, rgba(255,240,246,0.3) 0%, rgba(78, 44, 28, 0.4) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(255,240,246,0.5));
             z-index: 0; 
         }
 
         .hero-title {
             font-family: 'Great Vibes', cursive;
-            font-size: 7rem; color: white;
-            text-shadow: 3px 3px 15px rgba(0,0,0,0.3);
+            font-size: 4.5rem; /* Tamaño más elegante, no tan invasivo */
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 0;
         }
         .hero-subtitle {
-            font-size: 1.2rem; text-transform: uppercase;
-            letter-spacing: 8px; color: white; font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: white;
+            font-weight: 400;
         }
 
-        /* BOTONES MARKETING */
+        /* BOTONES */
         .btn-marketing {
             background-color: var(--color-pink-hot);
             color: white; border-radius: 50px;
-            padding: 15px 40px; font-weight: 600;
-            border: none; transition: 0.3s; text-decoration: none;
+            padding: 12px 35px; font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none; transition: 0.3s;
             display: inline-block;
-        }
-        .btn-marketing:hover { 
-            background-color: var(--color-chocolate); 
-            color: white; transform: translateY(-3px); 
+            box-shadow: 0 4px 15px rgba(255, 45, 145, 0.3);
         }
 
-        /* SERVICIOS / CARDS */
+        /* SERVICIOS ESTILO MINIMALISTA */
         .service-card { 
-            transition: 0.3s; border: none; 
-            background-color: white; border-radius: 20px;
-            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 45, 145, 0.1);
         }
-        .service-card:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 10px 20px rgba(255, 45, 145, 0.15);
-        }
-        .text-pink { color: var(--color-pink-hot); }
+        .service-card h6 { font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 10px; }
 
-        /* GALERIA SWIPER CUSTOM */
-        .swiper { width: 100%; padding: 50px 0; }
-        .photo-frame { overflow: hidden; border-radius: 20px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .photo-frame img { width: 100%; height: 450px; object-fit: cover; transition: 0.5s; }
-        .photo-frame:hover img { transform: scale(1.1); }
+        /* GALERIA (PROPORCIONES TIPO REVISTA) */
+        .swiper { padding: 40px 0; }
+        .photo-frame img {
+            width: 100%;
+            height: 350px; /* Altura controlada */
+            object-fit: cover;
+            border-radius: 10px;
+        }
 
-        /* BARRA SOCIAL FLOTANTE */
-        .social-sidebar {
-            position: fixed; right: 20px; bottom: 30px;
-            display: flex; flex-direction: column-reverse;
-            gap: 15px; z-index: 1000;
-        }
-        .social-btn {
-            width: 55px; height: 55px; border-radius: 50%;
-            color: white; display: flex; justify-content: center; align-items: center;
-            font-size: 24px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-            transition: transform 0.3s; text-decoration: none;
-        }
-        .float-wa { background-color: #25d366; animation: pulse 2s infinite; }
+        /* SIDEBAR SOCIAL REDUCIDO */
+        .social-sidebar { position: fixed; right: 15px; bottom: 20px; display: flex; flex-direction: column-reverse; gap: 10px; z-index: 1000; }
+        .social-btn { width: 45px; height: 45px; font-size: 18px; border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; text-decoration: none; }
+        .float-wa { background: #25d366; }
         .float-ig { background: linear-gradient(45deg, #f09433, #cc2366, #bc1888); }
-        .float-tk { background-color: #000000; }
+        .float-tk { background: #000; }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; }
+        .divider { width: 40px; height: 2px; background-color: var(--color-pink-hot); margin: 15px auto; }
+
+        /* SPLASH */
+        .splash-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: var(--color-pink-soft); z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: 1s;
         }
-
-        .section-title { font-family: 'Playfair Display', serif; font-weight: 700; }
-        .divider { width: 60px; height: 3px; background-color: var(--color-pink-hot); margin: 20px auto; }
+        .splash-hidden { opacity: 0; visibility: hidden; }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 3.5rem; }
-            .hero-subtitle { font-size: 0.8rem; letter-spacing: 3px; }
+            .hero-title { font-size: 3rem; }
+            .hero-subtitle { font-size: 0.7rem; letter-spacing: 3px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- SPLASH SCREEN -->
     <div class="splash-screen" id="splash">
-        <p style="letter-spacing: 5px; color: var(--color-chocolate); margin-bottom: 0;">BIENVENIDOS A</p>
-        <h1 class="splash-title">{{ nombre }}</h1>
+        <h1 style="font-family: 'Great Vibes', cursive; color: var(--color-pink-hot); font-size: 3rem;">{{ nombre }}</h1>
     </div>
 
-    <!-- HERO SECTION (VIDEO) -->
     <header class="hero-section">
         <video autoplay muted loop playsinline class="back-video">
             <source src="{{ video_path }}" type="video/mp4">
         </video>
         <div class="overlay"></div>
-        <div class="text-center position-relative" data-aos="fade-up">
-            <h1 class="hero-title mb-0">{{ nombre }}</h1>
-            <p class="hero-subtitle mb-4">{{ ubicacion }}</p>
-            <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="btn-marketing btn-lg mt-4">Ver Catálogo</a>
+        <div class="position-relative" data-aos="zoom-in">
+            <h1 class="hero-title">{{ nombre }}</h1>
+            <p class="hero-subtitle">{{ ubicacion }}</p>
+            <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="btn-marketing mt-3">VER CATÁLOGO</a>
         </div>
     </header>
 
-    <!-- EXPERIENCIA -->
-    <section class="py-5 container text-center">
+    <section class="container py-5 text-center">
         <div data-aos="fade-up">
-            <h2 class="section-title mt-5">Hecho con Amor</h2>
+            <h2 class="section-title">Nuestra Esencia</h2>
             <div class="divider"></div>
-            <p class="lead text-muted mx-auto" style="max-width: 800px;">{{ descripcion }}</p>
+            <p class="text-muted mx-auto mb-5" style="max-width: 600px; font-weight: 300; font-size: 1.1rem;">{{ descripcion }}</p>
         </div>
-    </section>
 
-    <!-- SERVICIOS DESTACADOS -->
-    <section class="py-5">
-        <div class="container text-center">
-            <div class="row g-4">
-                <div class="col-md-4 col-6" data-aos="zoom-in">
-                    <div class="service-card shadow-sm">
-                        <i class="fas fa-ice-cream fa-2x text-pink mb-3"></i>
-                        <h6 class="fw-bold">Postres en Vaso</h6>
-                    </div>
+        <div class="row g-3">
+            <div class="col-md-4 col-6" data-aos="fade-up">
+                <div class="service-card shadow-sm">
+                    <i class="fas fa-ice-cream text-pink mb-2"></i>
+                    <h6 class="fw-bold">Postres en Vaso</h6>
                 </div>
-                <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="service-card shadow-sm">
-                        <i class="fas fa-birthday-cake fa-2x text-pink mb-3"></i>
-                        <h6 class="fw-bold">Tortas de Autor</h6>
-                    </div>
+            </div>
+            <div class="col-md-4 col-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-card shadow-sm">
+                    <i class="fas fa-birthday-cake text-pink mb-2"></i>
+                    <h6 class="fw-bold">Tortas de Autor</h6>
                 </div>
-                <div class="col-md-4 col-12" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="service-card shadow-sm">
-                        <i class="fas fa-box-open fa-2x text-pink mb-3"></i>
-                        <h6 class="fw-bold">Cajas de Regalo</h6>
-                    </div>
+            </div>
+            <div class="col-md-4 col-12" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-card shadow-sm">
+                    <i class="fas fa-box-open text-pink mb-2"></i>
+                    <h6 class="fw-bold">Cajas de Regalo</h6>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- GALERIA DE FOTOS (NUEVA SECCIÓN) -->
-    <section class="container py-5">
-        <h2 class="section-title text-center">Nuestras Delicias</h2>
+    <section class="container pb-5">
+        <h2 class="section-title text-center">Tentaciones</h2>
         <div class="divider"></div>
-        <div class="swiper mySwiper" data-aos="fade-in">
+        <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 {{ gallery_content }}
             </div>
@@ -190,27 +170,22 @@
         </div>
     </section>
 
-    <!-- BARRA SOCIAL -->
     <div class="social-sidebar">
         <a href="https://wa.me/{{ whatsapp }}" class="social-btn float-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
         <a href="{{ instagram }}" class="social-btn float-ig" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="{{ facebook }}" class="social-btn" style="background-color: #1877F2;" target="_blank"><i class="fab fa-facebook-f"></i></a>
         <a href="{{ tiktok }}" class="social-btn float-tk" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
 
-    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1000, once: true });
+        AOS.init({ duration: 800, once: true });
         window.addEventListener('load', () => {
-            setTimeout(() => { document.getElementById('splash').classList.add('splash-hidden'); }, 2500);
+            setTimeout(() => { document.getElementById('splash').classList.add('splash-hidden'); }, 1500);
         });
 
-        // Configuración de la galería
         var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1, spaceBetween: 30, loop: true,
-            autoplay: { delay: 3000 },
+            slidesPerView: 1, spaceBetween: 20, loop: true,
             pagination: { el: ".swiper-pagination", clickable: true },
             breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
         });
