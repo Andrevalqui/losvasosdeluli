@@ -7,6 +7,8 @@
     <!-- Fuentes: Playfair para títulos y Dancing Script para cursiva profesional -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <!-- Librería para ampliar fotos (Lightbox) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
@@ -14,6 +16,7 @@
             --pink-hot: #e62e84;    /* Rosa del volante */
             --chocolate: #4e2c1c;   /* Chocolate del volante */
             --pink-soft: #fdf0f5;   /* Fondo rosa pastel */
+            --gold-arena: #d4a373;
         }
 
         body { font-family: 'Poppins', sans-serif; color: var(--chocolate); background-color: var(--pink-soft); margin: 0; }
@@ -45,7 +48,8 @@
         .service-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(230, 46, 132, 0.15); }
 
         /* Galería (Imagen 02) */
-        .photo-frame img { width: 100%; height: 450px; object-fit: cover; border-radius: 10px; }
+        .photo-frame img { width: 100%; height: 450px; object-fit: cover; border-radius: 10px; transition: 0.5s; }
+        .photo-frame:hover img { transform: scale(1.05); }
 
         /* Botón Marketing Rosa */
         .btn-marketing { background: var(--pink-hot); color: white; border-radius: 50px; padding: 12px 35px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; font-size: 0.8rem; border: none; }
@@ -56,7 +60,7 @@
         .review-box { border: 1px solid #5d3a2b; padding: 40px; border-radius: 10px; height: 100%; text-align: center; }
         .reviewer-name { font-size: 0.75rem; letter-spacing: 2px; font-weight: 700; margin-top: 20px; text-transform: uppercase; }
 
-        /* Sidebar Social */
+        /* Sidebar Social con TikTok */
         .social-sidebar { position: fixed; right: 20px; bottom: 30px; display: flex; flex-direction: column-reverse; gap: 12px; z-index: 1000; }
         .social-btn { width: 48px; height: 48px; border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; font-size: 18px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.3s; }
         .wa { background: #25d366; } .ig { background: linear-gradient(45deg, #f09433, #cc2366, #bc1888); } .fb { background: #1877F2; } .tk { background: #000; }
@@ -137,7 +141,7 @@
         <p class="text-center text-muted mt-4 small"><i class="fas fa-search-plus"></i> Haz clic en las fotos para ampliarlas</p>
     </section>
 
-    <!-- UBICACIÓN Y REDES (Imagen 01) -->
+    <!-- UBICACIÓN Y REDES -->
     <section id="ubicacion" class="section-padding">
         <div class="container text-center">
             <h2 class="section-title">Encuéntranos</h2>
@@ -175,6 +179,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Script para ampliar fotos -->
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
     <script>
         function scrollToId(id) {
             const element = document.getElementById(id);
@@ -189,6 +195,9 @@
             pagination: { el: ".swiper-pagination", clickable: true },
             breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
         });
+        // Activar zoom de fotos
+        const lightbox = GLightbox({ touchNavigation: true, loop: true });
     </script>
 </body>
 </html>
+
