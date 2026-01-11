@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Fuente Dancing Script para estilo profesional cursivo -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -19,18 +20,17 @@
         body { font-family: 'Poppins', sans-serif; color: var(--chocolate); background-color: var(--bg-soft); margin: 0; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* NAVBAR */
+        /* NAVBAR NEGRA (Imagen 04) */
         .navbar { background: rgba(0, 0, 0, 0.9) !important; padding: 15px 0; }
         .navbar-brand { font-family: 'Playfair Display'; color: white !important; font-size: 1.2rem; }
         .nav-link { color: rgba(255,255,255,0.8) !important; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer; }
         .nav-link:hover { color: var(--pink) !important; }
 
-        /* HERO & VIDEO BACKGROUND */
+        /* HERO & VIDEO (Imagen 04) */
         .hero { position: relative; height: 90vh; display: flex; justify-content: center; align-items: center; overflow: hidden; text-align: center; }
         .back-video { position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
-        .overlay { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.45); }
+        .overlay { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.4); top:0; left:0; }
         
-        /* Tipografía Profesional (Imagen 03) */
         .hero-title { font-family: 'Dancing Script', cursive; font-size: 5.5rem; color: white; text-transform: none; letter-spacing: 0; }
         .hero-subtitle { color: white; letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; margin-top: -10px; opacity: 0.9; }
 
@@ -45,37 +45,33 @@
         .service-card i { color: var(--gold-arena); font-size: 2rem; margin-bottom: 20px; }
         .service-card h6 { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #333; }
 
-        /* Galería (Imagen 02) */
         .photo-frame img { width: 100%; height: 450px; object-fit: cover; border-radius: 10px; }
 
-        /* CTA (Imagen 01) */
         .btn-marketing { background: var(--pink); color: white; border-radius: 50px; padding: 12px 35px; text-decoration: none; font-weight: 600; transition: 0.3s; display: inline-block; font-size: 0.8rem; border: none; }
         .btn-marketing:hover { background: var(--chocolate); color: white; transform: translateY(-3px); }
 
-        /* Testimonios */
         .testimonios-dark { background: #222; padding: 100px 0; color: white; }
         .review-box { border: 1px solid #444; padding: 40px; border-radius: 10px; height: 100%; text-align: center; }
         .stars { color: var(--gold-arena); font-size: 0.8rem; margin-bottom: 15px; }
         .reviewer-name { font-size: 0.75rem; letter-spacing: 2px; font-weight: 700; color: var(--gold-arena); margin-top: 20px; text-transform: uppercase; }
 
-        /* Sidebar Social */
         .social-sidebar { position: fixed; right: 20px; bottom: 30px; display: flex; flex-direction: column-reverse; gap: 12px; z-index: 1000; }
         .social-btn { width: 48px; height: 48px; border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; font-size: 18px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.3s; }
         .wa { background: #25d366; } .ig { background: linear-gradient(45deg, #f09433, #cc2366, #bc1888); } .fb { background: #1877F2; } .tk { background: #000; }
         .social-btn:hover { transform: scale(1.1); color: white; }
 
-        /* Splash con Video (Imagen 03) */
+        /* Splash Screen con Video (Imagen 03) */
         .splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: white; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 1s; overflow: hidden;}
         .splash-hidden { opacity: 0; visibility: hidden; }
         .splash-title { font-family: 'Dancing Script', cursive; color: var(--pink); font-size: 4rem; z-index: 2; position: relative; }
-        .splash-video { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.3; z-index: 1; }
+        .splash-video { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: 1; }
 
         @media (max-width: 768px) { .hero-title { font-size: 3.5rem; } }
     </style>
 </head>
 <body>
 
-    <!-- SPLASH SCREEN CON VIDEO -->
+    <!-- SPLASH SCREEN CON VIDEO (Imagen 03) -->
     <div class="splash-screen" id="splash">
         <video autoplay muted loop playsinline class="splash-video">
             <source src="{{ video_url }}" type="video/mp4">
@@ -104,7 +100,7 @@
         </div>
     </nav>
 
-    <!-- HERO CON VIDEO -->
+    <!-- HERO CON VIDEO (Imagen 04) -->
     <header class="hero">
         <video autoplay muted loop playsinline class="back-video">
             <source src="{{ video_url }}" type="video/mp4">
@@ -133,14 +129,12 @@
         </div>
     </section>
 
-    <!-- GALERIA (Imagen 02) -->
+    <!-- NUESTRA GALERÍA (Imagen 02) -->
     <section id="galeria" class="container section-padding">
         <h2 class="section-title text-center">Nuestra Galería</h2>
         <div class="divider"></div>
         <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                {{ gallery_content }}
-            </div>
+            <div class="swiper-wrapper">{{ gallery_content }}</div>
             <div class="swiper-pagination"></div>
         </div>
         <p class="text-center text-muted mt-4 small"><i class="fas fa-search-plus"></i> Haz clic en las fotos para ampliarlas</p>
@@ -151,41 +145,36 @@
         <div class="container text-center">
             <h2 class="section-title">Ubicación</h2>
             <div class="divider"></div>
-            <div class="ratio ratio-21x9 shadow rounded overflow-hidden">
+            <div class="ratio ratio-21x9 shadow rounded overflow-hidden mb-5">
                 <iframe src="{{ mapa_embed }}" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
             
-            <div class="mt-5 pt-4" data-aos="zoom-in">
-                <h4 style="font-family: 'Dancing Script'; font-size: 3rem; margin-bottom: 30px;">Síguenos</h4>
+            <div class="mt-5" data-aos="zoom-in">
+                <h4 style="font-family: 'Dancing Script'; font-size: 3rem; margin-bottom: 30px; text-transform:none;">Síguenos</h4>
                 <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <a href="{{ instagram }}" target="_blank" class="btn-marketing"><i class="fab fa-instagram me-2"></i> Instagram</a>
-                    <a href="{{ facebook }}" target="_blank" class="btn-marketing" style="background:#1877F2;"><i class="fab fa-facebook-f me-2"></i> Facebook</a>
-                    <a href="{{ tiktok }}" target="_blank" class="btn-marketing" style="background:#000;"><i class="fab fa-tiktok me-2"></i> TikTok</a>
+                    <a href="{{ instagram }}" target="_blank" class="btn btn-marketing"><i class="fab fa-instagram me-2"></i> Instagram</a>
+                    <a href="{{ facebook }}" target="_blank" class="btn btn-marketing" style="background:#1877F2;"><i class="fab fa-facebook-f me-2"></i> Facebook</a>
+                    <a href="{{ tiktok }}" target="_blank" class="btn btn-marketing" style="background:#000;"><i class="fab fa-tiktok me-2"></i> TikTok</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
     <section class="py-5" style="background: var(--gold-arena); color: white; text-align: center;">
         <div class="container" data-aos="flip-up">
             <h2 class="mb-4" style="text-transform: none; font-size: 2.5rem;">Ven y no te pierdas de estas delicias</h2>
-            <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="btn-white btn btn-light rounded-pill px-5 py-3 fw-bold">No dudes en Contactarnos</a>
+            <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="btn btn-light rounded-pill px-5 py-3 fw-bold" style="color:var(--gold-arena); text-decoration:none;">No dudes en Contactarnos</a>
         </div>
     </section>
 
-    <!-- TESTIMONIOS -->
     <section class="testimonios-dark">
         <div class="container text-center">
-            <h2 class="mb-5" style="font-size: 2.5rem; text-transform: none;">Lo que dicen nuestros clientes</h2>
-            <div class="row g-4">
-                {{ testimonios_items }}
-            </div>
-            <p class="mt-5 pt-5 opacity-25 small">&copy; {{ anio }} {{ nombre }} | Repostería de Autor</p>
+            <h2 class="mb-5" style="text-transform: none;">Lo que dicen nuestros clientes</h2>
+            <div class="row g-4">{{ testimonios_items }}</div>
         </div>
     </section>
 
-    <!-- SIDEBAR SOCIAL (Con TikTok) -->
+    <!-- SIDEBAR SOCIAL CON TIKTOK -->
     <div class="social-sidebar">
         <a href="https://wa.me/{{ whatsapp }}" class="social-btn wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
         <a href="{{ tiktok }}" class="social-btn tk" target="_blank"><i class="fab fa-tiktok"></i></a>
@@ -201,16 +190,10 @@
             const element = document.getElementById(id);
             if (element) { element.scrollIntoView({ behavior: 'smooth' }); }
         }
-
         document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                const splash = document.getElementById('splash');
-                if(splash) splash.classList.add('splash-hidden');
-            }, 2500);
+            setTimeout(() => { document.getElementById('splash').classList.add('splash-hidden'); }, 2500);
         });
-
         AOS.init({ duration: 1000, once: true });
-        
         var swiper = new Swiper(".mySwiper", {
             slidesPerView: 1, spaceBetween: 20, loop: true, autoplay: {delay: 3000},
             pagination: { el: ".swiper-pagination", clickable: true },
