@@ -57,7 +57,7 @@ if os.path.exists(img_folder):
             gallery_html += f'<div class="swiper-slide"><div class="photo-frame"><img src="{url_f}"></div></div>'
 
 # Cargamos tu video local
-video_path = f"{BASE_URL}/static/video/postres.mp4"
+video_path = f"{BASE_URL}/static/video/portada.mp4"
 
 # 4. PROCESAR HTML
 def cargar_web():
@@ -79,3 +79,4 @@ def cargar_web():
         return html
 
 st.components.v1.html(cargar_web(), height=1000, scrolling=True)
+
