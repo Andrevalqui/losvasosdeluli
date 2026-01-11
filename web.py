@@ -43,12 +43,11 @@ TESTIMONIOS = [
     {"nombre": "Empresa TechX", "comentario": "Nuestros clientes quedaron fascinados con los detalles."}
 ]
 
-# 3. LÓGICA DE RUTAS GITHUB (Para que las fotos carguen siempre)
+# 3. LÓGICA DE RUTAS GITHUB
 USER = "Andrevalqui"
 REPO = "losvasosdeluli"
 BASE_URL = f"https://raw.githubusercontent.com/{USER}/{REPO}/main"
 
-# Generar HTML de la galería
 gallery_html = ""
 img_folder = "static/img"
 if os.path.exists(img_folder):
@@ -64,7 +63,6 @@ if os.path.exists(img_folder):
                     </div>
                 </div>'''
 
-# Link del video
 video_path = f"{BASE_URL}/static/video/postres.mp4"
 
 # 4. PROCESAR EL HTML
@@ -72,7 +70,6 @@ def cargar_web():
     with open("templates/index.html", "r", encoding="utf-8") as f:
         html = f.read()
         
-        # Inyectar Listas (Servicios y Testimonios)
         serv_html = "".join([f'<div class="col-md-4 col-6" data-aos="fade-up"><div class="service-card p-4 bg-white rounded shadow-sm h-100"><i class="fas {s["icono"]} fa-2x text-pink mb-3"></i><h6 class="text-uppercase small fw-bold" style="font-size:0.7rem; letter-spacing:1px;">{s["nombre"]}</h6></div></div>' for s in SERVICIOS])
         test_html = "".join([f'<div class="col-md-4 mb-4" data-aos="fade-up"><div class="review-box p-4 border border-secondary rounded h-100"><div class="stars mb-2 text-warning">★★★★★</div><p class="fst-italic opacity-75 small">"{t["comentario"]}"</p><small class="text-uppercase text-pink fw-bold">{t["nombre"]}</small></div></div>' for t in TESTIMONIOS])
         
@@ -81,12 +78,11 @@ def cargar_web():
         html = html.replace("{{ gallery_content }}", gallery_html)
         html = html.replace("{{ video_url }}", video_path)
         
-        # Inyectar Info básica
         for clave, valor in INFO.items():
             html = html.replace(f"{{{{ {clave} }}}}", str(valor))
         
         html = html.replace("{{ anio }}", str(datetime.now().year))
         return html
 
-# 5. RENDER (MEJORA: Altura adaptativa y scroll habilitado)
+# 5. RENDER
 st.components.v1.html(cargar_web(), height=900, scrolling=True)
