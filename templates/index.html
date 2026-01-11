@@ -59,7 +59,16 @@
 
         .splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: white; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 1s; overflow: hidden;}
         .splash-hidden { opacity: 0; visibility: hidden; }
-        .splash-title { position: relative; font-family: 'Dancing Script', cursive; color: var(--pink-hot); font-size: 4rem; z-index: 2; }
+        .splash-title { 
+            position: relative; 
+            font-family: 'Dancing Script', cursive; 
+            color: var(--pink-hot); 
+            font-size: 5.5rem; /* Más grande y elegante */
+            z-index: 2; 
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.1); /* Sombra sutil para profundidad */
+            letter-spacing: 2px; /* Espaciado entre letras para mayor legibilidad */
+            font-weight: 700;
+        }
         .splash-video { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; z-index: 1; }
 
         /* RESPONSIVE DESIGN */
@@ -80,7 +89,10 @@
         <video autoplay muted loop playsinline class="splash-video" id="video-splash">
             <source src="{{ video_url }}" type="video/mp4">
         </video>
-        <h1 class="splash-title">{{ nombre }}</h1>
+        <div style="z-index: 2; text-align: center;">
+            <p style="letter-spacing: 10px; color: var(--chocolate); font-size: 0.8rem; margin-bottom: 0; opacity: 0.8; font-weight: 400;">BIENVENIDOS A</p>
+            <h1 class="splash-title">{{ nombre }}</h1>
+        </div>
     </div>
 
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
@@ -198,3 +210,4 @@
     </script>
 </body>
 </html>
+
