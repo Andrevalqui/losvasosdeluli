@@ -3,150 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ info.nombre }} | Alta Repostería</title>
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-pink-hot: #ff2d91;    /* Rosa fuerte de tu tarjeta */
+            --color-pink-soft: #fff0f6;   /* Fondo rosa pastel */
+            --color-chocolate: #4e2c1c;   /* Marrón chocolate del logo */
+        }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            color: var(--color-chocolate); 
+            background-color: var(--color-pink-soft);
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* SPLASH SCREEN */
+        .splash-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: var(--color-pink-soft); z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+        .splash-hidden { opacity: 0; visibility: hidden; }
+        .splash-title { font-family: 'Great Vibes', cursive; font-size: 5rem; color: var(--color-pink-hot); }
+
+        /* HERO SECTION */
+        .hero-section {
+            position: relative; height: 100vh; display: flex;
+            justify-content: center; align-items: center; overflow: hidden;
+        }
+        .back-video {
+            position: absolute; min-width: 100%; min-height: 100%;
+            z-index: -1; object-fit: cover;
+        }
+        .overlay { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: linear-gradient(0deg, rgba(255,240,246,0.3) 0%, rgba(78, 44, 28, 0.4) 100%);
+            z-index: 0; 
+        }
+
+        .hero-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 7rem; color: white;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.3);
+        }
+        .hero-subtitle {
+            font-size: 1.2rem; text-transform: uppercase;
+            letter-spacing: 8px; color: white; font-weight: 600;
+        }
+
+        /* BOTONES MARKETING */
+        .btn-marketing {
+            background-color: var(--color-pink-hot);
+            color: white; border-radius: 50px;
+            padding: 15px 40px; font-weight: 600;
+            border: none; transition: 0.3s; text-decoration: none;
+            display: inline-block;
+        }
+        .btn-marketing:hover { 
+            background-color: var(--color-chocolate); 
+            color: white; transform: translateY(-3px); 
+        }
+
+        /* SERVICIOS / CARDS */
+        .service-card { 
+            transition: 0.3s; border: none; 
+            background-color: white; border-radius: 20px;
+            padding: 2rem;
+        }
+        .service-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 10px 20px rgba(255, 45, 145, 0.15);
+        }
+        .text-pink { color: var(--color-pink-hot); }
+
+        /* BARRA SOCIAL FLOTANTE */
+        .social-sidebar {
+            position: fixed; right: 20px; bottom: 30px;
+            display: flex; flex-direction: column-reverse;
+            gap: 15px; z-index: 1000;
+        }
+        .social-btn {
+            width: 55px; height: 55px; border-radius: 50%;
+            color: white; display: flex; justify-content: center; align-items: center;
+            font-size: 24px; box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s; text-decoration: none;
+        }
+        .float-wa { background-color: #25d366; animation: pulse 2s infinite; }
+        .float-ig { background: linear-gradient(45deg, #f09433, #cc2366, #bc1888); }
+        .float-tk { background-color: #000000; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .section-title { font-family: 'Playfair Display', serif; font-weight: 700; }
+        .divider { width: 60px; height: 3px; background-color: var(--color-pink-hot); margin: 20px auto; }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3.5rem; }
+            .hero-subtitle { font-size: 0.8rem; letter-spacing: 3px; }
+        }
+    </style>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#navbarNav">
+<body>
 
     <!-- SPLASH SCREEN -->
     <div class="splash-screen" id="splash">
-        <p class="splash-subtitle">BIENVENIDOS A</p>
-        <h1 class="splash-title">{{ info.nombre }}</h1>
+        <p style="letter-spacing: 5px; color: var(--color-chocolate); margin-bottom: 0;">BIENVENIDOS A</p>
+        <h1 class="splash-title">{{ nombre }}</h1>
     </div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="#">{{ info.nombre }}</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="#experiencia">Nuestra Esencia</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#productos">La Carta</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
-                    <li class="nav-item ms-lg-3">
-                        <a href="{{ ws_link }}" class="btn btn-marketing btn-sm text-white">Pedir por WhatsApp</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- HERO (VIDEO) -->
+    <!-- HERO SECTION (VIDEO) -->
     <header class="hero-section">
+        <!-- Video sugerido: Decoración de torta con crema rosa -->
         <video autoplay muted loop playsinline class="back-video">
-            <source src="{{ url_for('static', filename='video/postres.mp4') }}" type="video/mp4">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-decorating-a-cake-with-pink-cream-43382-large.mp4" type="video/mp4">
         </video>
-        <div class="content text-center" data-aos="fade-up" data-aos-duration="1500">
-            <h1 class="hero-title mb-0">{{ info.nombre }}</h1>
-            <p class="hero-subtitle mb-4">Postres que cuentan historias</p>
-            <a href="#experiencia" class="btn btn-marketing btn-lg mt-4">Explorar Dulzura</a>
-        </div>
         <div class="overlay"></div>
+        <div class="text-center position-relative" data-aos="fade-up">
+            <h1 class="hero-title mb-0">{{ nombre }}</h1>
+            <p class="hero-subtitle mb-4">{{ ubicacion }}</p>
+            <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="btn-marketing btn-lg mt-4">Ver Catálogo</a>
+        </div>
     </header>
 
     <!-- EXPERIENCIA -->
-    <section id="experiencia" class="py-5 container text-center">
+    <section class="py-5 container text-center">
         <div data-aos="fade-up">
-            <h2 class="section-title mt-5">Arte en Cada Bocado</h2>
+            <h2 class="section-title mt-5">Hecho con Amor</h2>
             <div class="divider"></div>
-            <p class="lead text-muted mx-auto" style="max-width: 800px; font-weight: 300;">{{ info.descripcion }}</p>
+            <p class="lead text-muted mx-auto" style="max-width: 800px;">{{ descripcion }}</p>
         </div>
     </section>
 
-    <!-- SERVICIOS / ESPECIALIDADES -->
-    <section id="productos" class="py-5 bg-light">
-        <div class="container">
-            <div class="row text-center g-4">
-                {% for s in servicios %}
-                <div class="col-md-4 col-6" data-aos="fade-up" data-aos-delay="{{ loop.index * 50 }}">
-                    <div class="service-card p-4 bg-white rounded-4 shadow-sm h-100">
-                        <i class="fas {{ s.icono }} fa-2x text-gold mb-3"></i>
-                        <h6 class="text-uppercase fw-bold small">{{ s.nombre }}</h6>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </section>
-
-    <!-- GALERÍA (SWIPER PRO) -->
-    <section id="galeria" class="py-5">
-        <div class="container" data-aos="fade-in">
-            <h2 class="section-title text-center">Tentaciones Visuales</h2>
-            <div class="divider"></div>
-            
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    {% for foto in galeria %}
-                    <div class="swiper-slide">
-                        <div class="photo-frame shadow-sm">
-                            <img src="{{ url_for('static', filename='img/' + foto) }}" alt="Postre Gourmet">
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIOS -->
-    <section class="py-5 bg-dark text-white">
+    <!-- SERVICIOS DESTACADOS -->
+    <section class="py-5">
         <div class="container text-center">
-            <h2 class="mb-5" data-aos="fade-down">Lo que dicen nuestros amantes del dulce</h2>
-            <div class="row justify-content-center">
-                {% for r in reviews %}
-                <div class="col-md-4 mb-4" data-aos="fade-up">
-                    <div class="p-4 border border-secondary rounded-4 h-100">
-                        <div class="stars mb-2 text-warning">★★★★★</div>
-                        <p class="fst-italic opacity-75">"{{ r.comentario }}"</p>
-                        <small class="text-uppercase text-gold fw-bold">{{ r.nombre }}</small>
+            <div class="row g-4">
+                <div class="col-md-4 col-6" data-aos="zoom-in">
+                    <div class="service-card shadow-sm">
+                        <i class="fas fa-ice-cream fa-2x text-pink mb-3"></i>
+                        <h6 class="fw-bold">Postres en Vaso</h6>
                     </div>
                 </div>
-                {% endfor %}
+                <div class="col-md-4 col-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="service-card shadow-sm">
+                        <i class="fas fa-birthday-cake fa-2x text-pink mb-3"></i>
+                        <h6 class="fw-bold">Tortas de Autor</h6>
+                    </div>
+                </div>
+                <div class="col-md-4 col-12" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="service-card shadow-sm">
+                        <i class="fas fa-box-open fa-2x text-pink mb-3"></i>
+                        <h6 class="fw-bold">Cajas de Regalo</h6>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- BARRA LATERAL (TU CÓDIGO PRO) -->
+    <!-- BARRA SOCIAL -->
     <div class="social-sidebar">
-        <a href="{{ ws_link }}" class="social-btn float-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        <a href="{{ info.instagram }}" class="social-btn float-ig" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="{{ info.facebook }}" class="social-btn float-fb" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://wa.me/{{ whatsapp }}" class="social-btn float-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="{{ instagram }}" class="social-btn float-ig" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="{{ facebook }}" class="social-btn" style="background-color: #1877F2;" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="{{ tiktok }}" class="social-btn float-tk" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
 
-    <!-- SCRIPTS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- SCRIPTS ANIMACIÓN -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
     <script>
-        // Splash logic
+        AOS.init({ duration: 1000, once: true });
         window.addEventListener('load', () => {
             setTimeout(() => {
-                const splash = document.getElementById('splash');
-                splash.classList.add('splash-hidden');
+                document.getElementById('splash').classList.add('splash-hidden');
             }, 2500);
-        });
-
-        AOS.init({ duration: 1000, once: true });
-
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1, spaceBetween: 30, loop: true,
-            pagination: { el: ".swiper-pagination", clickable: true },
-            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-            breakpoints: { 640: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } },
         });
     </script>
 </body>
