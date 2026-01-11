@@ -2,9 +2,6 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ nombre }} | Alta Repostería</title>
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -18,52 +15,77 @@
             --bg-soft: #fff0f6;
         }
 
-        html { scroll-behavior: smooth; }
-        section { scroll-margin-top: 100px; }
-
+        /* Estilos Base - Réplica Brisa Milagro */
         body { font-family: 'Poppins', sans-serif; color: var(--chocolate); background-color: var(--bg-soft); margin: 0; }
-        
-        .navbar { backdrop-filter: blur(10px); background-color: rgba(255, 255, 255, 0.9) !important; border-bottom: 1px solid rgba(255, 45, 145, 0.1); }
-        .navbar-brand { font-family: 'Playfair Display'; color: var(--chocolate) !important; font-size: 1.4rem; }
-        .nav-link { color: var(--chocolate) !important; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; text-transform: uppercase; letter-spacing: 2px; }
 
-        .hero { position: relative; height: 85vh; display: flex; justify-content: center; align-items: center; overflow: hidden; text-align: center; }
+        /* Navbar */
+        .navbar { background: rgba(0, 0, 0, 0.9) !important; padding: 15px 0; }
+        .navbar-brand { font-family: 'Playfair Display'; color: white !important; font-size: 1.2rem; }
+        .nav-link { color: rgba(255,255,255,0.8) !important; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer; }
+        .nav-link:hover { color: var(--pink) !important; }
+
+        /* Hero */
+        .hero { position: relative; height: 90vh; display: flex; justify-content: center; align-items: center; overflow: hidden; text-align: center; }
         .back-video { position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
-        .overlay { position: absolute; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(255,240,246,0.6)); }
+        .overlay { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.4); }
+        .hero-title { font-family: 'Great Vibes', cursive; font-size: 5.5rem; color: white; text-transform: none; letter-spacing: 0; }
+        .hero-subtitle { color: white; letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; margin-top: -10px; opacity: 0.9; }
+
+        /* Botón Descubrir (Brisa Style) */
+        .btn-discover { background: #d4a373; color: white; border-radius: 50px; padding: 10px 30px; text-decoration: none; font-size: 0.8rem; font-weight: 600; transition: 0.3s; cursor: pointer; border: none; }
+        .btn-discover:hover { background: white; color: #d4a373; transform: scale(1.05); }
+
+        /* Secciones */
+        .section-padding { padding: 100px 0; }
+        .section-title { font-size: 2.2rem; margin-bottom: 10px; }
+        .divider { width: 50px; height: 2px; background: #d4a373; margin: 20px auto; }
         
-        .hero-title { font-family: 'Great Vibes', cursive; font-size: 4.5rem; color: white; text-shadow: 2px 2px 15px rgba(0,0,0,0.4); margin-bottom: 0; }
-        .hero-subtitle { color: white; letter-spacing: 6px; text-transform: uppercase; font-size: 0.9rem; font-weight: 400; }
+        /* Tarjetas de Servicio (Foto 2) */
+        .service-card { background: white; border-radius: 5px; padding: 40px 20px; transition: 0.3s; border: none; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .service-card i { color: #d4a373; font-size: 2rem; margin-bottom: 20px; }
+        .service-card h6 { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #333; }
 
-        .section-padding { padding: 80px 0; }
-        .section-title { font-family: 'Playfair Display'; font-size: 2rem; text-transform: uppercase; letter-spacing: 3px; }
-        .divider { width: 50px; height: 2px; background: var(--pink); margin: 20px auto; }
-        
-        .service-card { border: none; border-radius: 15px; transition: 0.4s; }
-        .service-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(255,45,145,0.15); }
+        /* Galería (Foto 3) */
+        .photo-frame img { width: 100%; height: 450px; object-fit: cover; border-radius: 10px; }
 
-        .photo-frame img { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; transition: 0.5s; }
+        /* Ubicación (Foto 4) */
+        .map-container { border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 
+        /* CTA (Foto 5) */
+        .cta-section { background: #d4a373; padding: 80px 0; color: white; text-align: center; }
+        .btn-white { background: white; color: #333; border-radius: 50px; padding: 15px 40px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+
+        /* Testimonios (Foto 5 inferior) */
+        .testimonios-dark { background: #222; padding: 100px 0; color: white; }
+        .review-box { border: 1px solid #444; padding: 40px; border-radius: 10px; height: 100%; }
+        .stars { color: #d4a373; font-size: 0.8rem; margin-bottom: 15px; }
+        .review-box p { font-style: italic; font-size: 0.9rem; opacity: 0.8; line-height: 1.8; }
+        .reviewer-name { font-size: 0.75rem; letter-spacing: 2px; font-weight: 700; color: #d4a373; margin-top: 20px; text-transform: uppercase; }
+
+        /* Sidebar Social */
         .social-sidebar { position: fixed; right: 20px; bottom: 30px; display: flex; flex-direction: column-reverse; gap: 12px; z-index: 1000; }
-        .social-btn { width: 48px; height: 48px; border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; font-size: 20px; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.3s; }
+        .social-btn { width: 48px; height: 48px; border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; font-size: 18px; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s; }
         .wa { background: #25d366; } .ig { background: linear-gradient(45deg, #f09433, #cc2366, #bc1888); } .fb { background: #1877F2; } .tk { background: #000; }
-        .social-btn:hover { transform: scale(1.1); color: white; }
+        .social-btn:hover { transform: translateY(-5px); color: white; }
 
-        .splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-soft); z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 1s; }
+        .splash-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: white; z-index: 9999; display: flex; justify-content: center; align-items: center; transition: 1s; }
         .splash-hidden { opacity: 0; visibility: hidden; }
 
         @media (max-width: 768px) {
-            .hero-title { font-size: 3rem; }
-            .hero-subtitle { font-size: 0.7rem; letter-spacing: 3px; }
+            .hero-title { font-size: 3.5rem; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#navbar-main">
+<body>
 
     <div class="splash-screen" id="splash">
         <h1 style="font-family: 'Great Vibes', cursive; color: var(--pink); font-size: 3.5rem;">{{ nombre }}</h1>
     </div>
 
-    <nav class="navbar navbar-expand-lg fixed-top shadow-sm" id="navbar-main">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">{{ nombre }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -71,18 +93,19 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link" onclick="scrollToId('experiencia')">Esencia</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="scrollToId('servicios')">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="scrollToId('galeria')">Galería</a></li>
-                    <li class="nav-item"><a class="nav-link" onclick="scrollToId('ubicacion')">Ubicación</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="scrollSection('experiencia')">Experiencia</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="scrollSection('servicios')">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="scrollSection('galeria')">Nuestros Espacios</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="scrollSection('ubicacion')">Ubicación</a></li>
                     <li class="nav-item ms-lg-3">
-                        <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="btn btn-danger btn-sm rounded-pill px-4 py-2" style="background: var(--pink); border:none; font-size:0.7rem; font-weight:600;">PIDE AHORA</a>
+                        <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="btn btn-warning btn-sm rounded-pill px-4 text-white fw-bold" style="font-size: 0.7rem; background: #e0ac1c; border:none;">RESERVAR</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- HERO -->
     <header class="hero">
         <video autoplay muted loop playsinline class="back-video">
             <source src="{{ video_url }}" type="video/mp4">
@@ -91,19 +114,21 @@
         <div class="text-center position-relative" data-aos="zoom-in">
             <h1 class="hero-title">{{ nombre }}</h1>
             <p class="hero-subtitle">{{ ubicacion }}</p>
-            <a onclick="scrollToId('experiencia')" class="btn btn-outline-light rounded-pill px-5 py-2 mt-4" style="font-size: 0.8rem; letter-spacing: 1px; cursor:pointer;">DESCUBRIR</a>
+            <button onclick="scrollSection('experiencia')" class="btn-discover mt-4"><i class="fas fa-chevron-down me-2"></i> Descubrir Más</button>
         </div>
     </header>
 
+    <!-- EXPERIENCIA -->
     <section id="experiencia" class="container section-padding text-center">
         <div data-aos="fade-up">
-            <h2 class="section-title">Hecho con Amor</h2>
+            <h2 class="section-title">La Experiencia</h2>
             <div class="divider"></div>
-            <p class="lead text-muted mx-auto mb-5" style="max-width: 700px; font-size: 1rem;">{{ descripcion }}</p>
+            <p class="lead text-muted mx-auto" style="max-width: 800px; font-size: 1.1rem;">{{ descripcion }}</p>
         </div>
     </section>
 
-    <section id="servicios" class="bg-white section-padding">
+    <!-- SERVICIOS -->
+    <section id="servicios" class="bg-light section-padding">
         <div class="container text-center">
             <div class="row g-4">
                 {{ servicios_items }}
@@ -111,8 +136,9 @@
         </div>
     </section>
 
+    <!-- GALERIA -->
     <section id="galeria" class="container section-padding">
-        <h2 class="section-title text-center">Tentaciones</h2>
+        <h2 class="section-title text-center">Nuestros Espacios</h2>
         <div class="divider"></div>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
@@ -120,34 +146,51 @@
             </div>
             <div class="swiper-pagination"></div>
         </div>
+        <p class="text-center text-muted mt-4 small"><i class="fas fa-search-plus"></i> Haz clic en las fotos para ampliarlas</p>
     </section>
 
-    <!-- SECCIÓN UBICACIÓN -->
-    <section id="ubicacion" class="py-5 bg-white">
+    <!-- UBICACION -->
+    <section id="ubicacion" class="section-padding">
         <div class="container text-center">
-            <h2 class="section-title">Encuéntranos</h2>
+            <h2 class="section-title">Ubicación Frente al Mar</h2>
             <div class="divider"></div>
-            <div class="ratio ratio-21x9 shadow rounded mb-4 mt-4 overflow-hidden">
-                <iframe src="{{ mapa_link }}" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <p class="mb-4 opacity-75">A solo 20 minutos de la Plaza de Armas de Pacasmayo.</p>
+            <div class="map-container ratio ratio-21x9">
+                <iframe src="{{ mapa_embed }}" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
-            <div class="mt-4">
-                <a href="{{ instagram }}" target="_blank" class="btn btn-outline-dark rounded-pill px-4 btn-sm mx-1">Instagram</a>
-                <a href="{{ facebook }}" target="_blank" class="btn btn-primary rounded-pill px-4 btn-sm mx-1" style="background:#1877F2; border:none;">Facebook</a>
-                <a href="{{ tiktok }}" target="_blank" class="btn btn-dark rounded-pill px-4 btn-sm mx-1">TikTok</a>
+            <a href="{{ mapa_link }}" target="_blank" class="btn btn-outline-dark rounded-pill px-5 py-3 mt-5 fw-bold" style="font-size: 0.8rem;">
+                <i class="fas fa-map-marked-alt me-2"></i> Ver ruta en Google Maps
+            </a>
+            <div class="mt-5 pt-4">
+                <h4 style="font-family: 'Great Vibes'; font-size: 2.5rem; margin-bottom: 30px;">Síguenos</h4>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{{ instagram }}" target="_blank" class="btn btn-danger rounded-pill px-4" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); border:none;"><i class="fab fa-instagram me-2"></i> Instagram</a>
+                    <a href="{{ facebook }}" target="_blank" class="btn btn-primary rounded-pill px-4" style="background:#1877F2; border:none;"><i class="fab fa-facebook-f me-2"></i> Facebook</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="py-5 bg-dark text-white text-center">
-        <div class="container">
-            <h2 class="mb-5">Clientes Felices</h2>
-            <div class="row">
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container" data-aos="flip-up">
+            <h2 class="mb-4" style="text-transform: none; font-size: 2.5rem;">¿Te imaginas despertando aquí?</h2>
+            <a href="https://wa.me/{{ whatsapp }}" target="_blank" class="btn-white">No dudes en Contactarnos</a>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="testimonios-dark">
+        <div class="container text-center">
+            <h2 class="mb-5" style="font-size: 2.5rem; text-transform: none;">Lo que dicen nuestros huéspedes</h2>
+            <div class="row g-4">
                 {{ testimonios_items }}
             </div>
-            <p class="mt-5 opacity-50 small">&copy; {{ anio }} {{ nombre }}</p>
+            <p class="mt-5 pt-5 opacity-25 small">&copy; {{ anio }} Derechos Reservados por la Empresa.</p>
         </div>
     </section>
 
+    <!-- SIDEBAR SOCIAL -->
     <div class="social-sidebar">
         <a href="https://wa.me/{{ whatsapp }}" class="social-btn wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
         <a href="{{ tiktok }}" class="social-btn tk" target="_blank"><i class="fab fa-tiktok"></i></a>
@@ -159,8 +202,8 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        // Función para navegación interna en Iframe
-        function scrollToId(id) {
+        // Fix para navegación interna en Iframe
+        function scrollSection(id) {
             const element = document.getElementById(id);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
