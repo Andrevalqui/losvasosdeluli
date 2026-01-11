@@ -63,7 +63,7 @@ if os.path.exists(img_folder):
                     </div>
                 </div>'''
 
-# Video local y LOGO
+# Cargamos tu video local y el logo
 video_path = f"{BASE_URL}/static/video/portada.mp4"
 logo_path = f"{BASE_URL}/logo.png"
 
