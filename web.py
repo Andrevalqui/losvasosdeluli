@@ -54,7 +54,6 @@ if os.path.exists(img_folder):
     for foto in os.listdir(img_folder):
         if foto.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
             url_f = f"{BASE_URL}/static/img/{foto}"
-            # MEJORA: Envolvemos la imagen en un <a> con clase glightbox
             gallery_html += f'''
                 <div class="swiper-slide">
                     <div class="photo-frame shadow-sm">
@@ -64,21 +63,23 @@ if os.path.exists(img_folder):
                     </div>
                 </div>'''
 
-# Video local
-video_path = f"{BASE_URL}/static/video/Portada.mp4"
+# Video local y LOGO
+video_path = f"{BASE_URL}/static/video/portada.mp4"
+logo_path = f"{BASE_URL}/logo.png"
 
 # 4. PROCESAR HTML
 def cargar_web():
     with open("templates/index.html", "r", encoding="utf-8") as f:
         html = f.read()
         
-        serv_html = "".join([f'<div class="col-md-4 col-6" data-aos="fade-up"><div class="service-card shadow-sm"><i class="fas {s["icono"]} mb-3" style="color:#e62e84"></i><h6>{s["nombre"]}</h6></div></div>' for s in SERVICIOS])
-        test_html = "".join([f'<div class="col-md-4 mb-4" data-aos="fade-up"><div class="review-box"><div class="stars mb-2" style="color:#e62e84">★★★★★</div><p>"{t["comentario"]}"</p><div class="reviewer-name" style="color:#e62e84">{t["nombre"]}</div></div></div>' for t in TESTIMONIOS])
+        serv_html = "".join([f'<div class="col-md-4 col-6" data-aos="fade-up"><div class="service-card shadow-sm"><i class="fas {s["icono"]} mb-3" style="color:#d4a373"></i><h6>{s["nombre"]}</h6></div></div>' for s in SERVICIOS])
+        test_html = "".join([f'<div class="col-md-4 mb-4" data-aos="fade-up"><div class="review-box"><div class="stars mb-2" style="color:#d4a373">★★★★★</div><p>"{t["comentario"]}"</p><div class="reviewer-name" style="color:#d4a373">{t["nombre"]}</div></div></div>' for t in TESTIMONIOS])
 
         html = html.replace("{{ servicios_items }}", serv_html)
         html = html.replace("{{ testimonios_items }}", test_html)
         html = html.replace("{{ gallery_content }}", gallery_html)
         html = html.replace("{{ video_url }}", video_path)
+        html = html.replace("{{ logo_url }}", logo_path)
         
         for k, v in INFO.items():
             html = html.replace(f"{{{{ {k} }}}}", str(v))
@@ -87,4 +88,3 @@ def cargar_web():
         return html
 
 st.components.v1.html(cargar_web(), height=1000, scrolling=True)
-
