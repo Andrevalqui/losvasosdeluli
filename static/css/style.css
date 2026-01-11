@@ -1,0 +1,138 @@
+/* FUENTES Y COLORES GOURMET */
+:root {
+    --color-gold: #c5a47e;       /* Oro Champagne */
+    --color-dark: #1a1a1a;       /* Negro Chocolate */
+    --color-cream: #f9f6f2;      /* Crema suave para fondos */
+    --font-heading: 'Playfair Display', serif; 
+    --font-body: 'Poppins', sans-serif;        
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-dark);
+    background-color: white;
+}
+
+h1, h2, h3 { font-family: var(--font-heading); }
+
+/* === 1. SPLASH SCREEN === */
+.splash-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh;
+    background-color: var(--color-dark);
+    z-index: 9999;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: opacity 1s ease-out, visibility 1s ease-out;
+}
+.splash-hidden { opacity: 0; visibility: hidden; }
+
+.splash-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 5rem;
+    color: var(--color-gold);
+    animation: fadeInUp 1.5s ease;
+    text-align: center;
+}
+.splash-subtitle {
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: white;
+    font-size: 0.9rem;
+    animation: fadeInDown 1.5s ease;
+}
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* === 2. BARRA FLOTANTE REDES === */
+.social-sidebar {
+    position: fixed;
+    right: 20px; bottom: 30px;
+    display: flex; flex-direction: column-reverse;
+    gap: 15px; z-index: 1000;
+}
+.social-btn {
+    width: 55px; height: 55px; border-radius: 50%;
+    color: white; display: flex; justify-content: center; align-items: center;
+    font-size: 24px; box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    transition: transform 0.3s; text-decoration: none;
+}
+.social-btn:hover { transform: scale(1.1); color: white; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+
+.float-wa { background-color: #25d366; animation: pulse 2s infinite; }
+.float-ig { background: linear-gradient(45deg, #f09433, #cc2366, #bc1888); }
+.float-fb { background-color: #1877F2; }
+
+@keyframes pulse {
+	0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+	70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+	100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* === 3. HERO SECTION === */
+.hero-section {
+    position: relative; width: 100%; height: 100vh;
+    display: flex; justify-content: center; align-items: center;
+    overflow: hidden;
+}
+.back-video {
+    position: absolute; right: 0; bottom: 0;
+    min-width: 100%; min-height: 100%;
+    z-index: -1; object-fit: cover;
+}
+.overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 0;
+}
+.hero-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 7rem;
+    color: white;
+    text-shadow: 2px 2px 15px rgba(0,0,0,0.5);
+}
+.hero-subtitle {
+    font-size: 1.2rem; text-transform: uppercase;
+    letter-spacing: 8px; color: var(--color-gold);
+}
+
+/* === 4. COMPONENTES === */
+.btn-marketing {
+    background-color: var(--color-gold);
+    color: white; border-radius: 50px;
+    padding: 15px 40px; font-weight: 600;
+    border: none; transition: 0.3s;
+}
+.btn-marketing:hover { background-color: white; color: var(--color-gold); transform: translateY(-3px); }
+
+.section-title { text-transform: uppercase; letter-spacing: 3px; font-size: 2.2rem; }
+.divider { width: 60px; height: 3px; background-color: var(--color-gold); margin: 20px auto; }
+
+.service-card { transition: 0.3s; border: 1px solid #eee; }
+.service-card:hover { transform: translateY(-10px); border-color: var(--color-gold); }
+.text-gold { color: var(--color-gold); }
+
+/* FOTOS ESTILO REVISTA */
+.photo-frame { overflow: hidden; border-radius: 12px; }
+.photo-frame img { transition: transform 0.6s ease; height: 400px; object-fit: cover; width: 100%; }
+.photo-frame:hover img { transform: scale(1.08); }
+
+/* SWIPER CUSTOM */
+.swiper-button-next, .swiper-button-prev {
+    color: var(--color-gold) !important;
+    background: white; width: 50px; height: 50px; border-radius: 50%;
+}
+
+/* NAVBAR LUXURY */
+.navbar {
+    backdrop-filter: blur(15px);
+    background-color: rgba(255, 255, 255, 0.85) !important;
+}
+.navbar-brand { font-family: var(--font-heading); color: var(--color-dark) !important; }
+.nav-link { color: var(--color-dark) !important; font-weight: 500; }
+
+@media (max-width: 768px) {
+    .hero-title { font-size: 4rem; }
+    .hero-subtitle { font-size: 0.8rem; letter-spacing: 4px; }
+    .splash-title { font-size: 3rem; }
+}
