@@ -15,7 +15,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 2. DATOS
+# 2. DATOS (Mantenemos tus links originales)
 INFO = {
     "nombre": "Los Vasos de Luli",
     "ubicacion": "Repostería Artesanal, Pacasmayo",
@@ -23,7 +23,7 @@ INFO = {
     "whatsapp": "51977905037",
     "instagram": "https://www.instagram.com/losvasosdeluli7/",
     "facebook": "https://www.facebook.com/profile.php?id=61568275415704",
-    "tiktok": "https://www.tiktok.com/@losvasitosdeluli7",
+    "tiktok": "https://www.tiktok.com/@losvasitosdeluli7?fbclid=IwY2xjawPQn_5leHRuA2FlbQIxMABicmlkETFkUGF2aHdqM1V4a0gwMXJ0c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHh7Br_jKbR-eLmTiOeDiEEnvkY37IKpR4z5Ax2g7aZ86PEknNxQRPHg15i30_aem_3tTP-g9zBqMhGcVMaCZknw",
     "mapa_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d791.4939023412573!2d-79.56447831518596!3d-7.402360599547372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjQnMDguNSJTIDc5wrAzMyc0OS43Ilc!5e0!3m2!1ses!2spe!4v1700000000000!5m2!1ses!2spe",
     "mapa_link": "https://www.google.com/maps/place/7%C2%B024'08.5%22S+79%C2%B033'49.7%22W/@-7.4023527,-79.5650227,293m/"
 }
@@ -56,36 +56,21 @@ if os.path.exists(img_folder):
             url_f = f"{BASE_URL}/static/img/{foto}"
             gallery_html += f'<div class="swiper-slide"><div class="photo-frame"><img src="{url_f}"></div></div>'
 
-video_url = f"{BASE_URL}/static/video/postres.mp4"
+# Cargamos tu video local
+video_path = f"{BASE_URL}/static/video/postres.mp4"
 
 # 4. PROCESAR HTML
 def cargar_web():
     with open("templates/index.html", "r", encoding="utf-8") as f:
         html = f.read()
         
-        # Inyectar servicios (Tarjetas blancas de la foto)
-        serv_html = "".join([f'''
-            <div class="col-md-4 col-6" data-aos="fade-up">
-                <div class="service-card shadow-sm">
-                    <i class="fas {s['icono']} mb-3"></i>
-                    <h6>{s['nombre']}</h6>
-                </div>
-            </div>''' for s in SERVICIOS])
-            
-        # Inyectar testimonios (Cajas oscuras de la foto)
-        test_html = "".join([f'''
-            <div class="col-md-4 mb-4" data-aos="fade-up">
-                <div class="review-box">
-                    <div class="stars mb-2">★★★★★</div>
-                    <p>"{t['comentario']}"</p>
-                    <div class="reviewer-name">{t['nombre']}</div>
-                </div>
-            </div>''' for t in TESTIMONIOS])
+        serv_html = "".join([f'<div class="col-md-4 col-6" data-aos="fade-up"><div class="service-card shadow-sm"><i class="fas {s["icono"]} mb-3"></i><h6>{s["nombre"]}</h6></div></div>' for s in SERVICIOS])
+        test_html = "".join([f'<div class="col-md-4 mb-4" data-aos="fade-up"><div class="review-box"><div class="stars mb-2">★★★★★</div><p>"{t["comentario"]}"</p><div class="reviewer-name">{t["nombre"]}</div></div></div>' for t in TESTIMONIOS])
 
         html = html.replace("{{ servicios_items }}", serv_html)
         html = html.replace("{{ testimonios_items }}", test_html)
         html = html.replace("{{ gallery_content }}", gallery_html)
-        html = html.replace("{{ video_url }}", video_url)
+        html = html.replace("{{ video_url }}", video_path)
         
         for k, v in INFO.items():
             html = html.replace(f"{{{{ {k} }}}}", str(v))
@@ -93,5 +78,4 @@ def cargar_web():
         html = html.replace("{{ anio }}", str(datetime.now().year))
         return html
 
-# 5. RENDER (Altura de 100vh para que no se vea cortado)
 st.components.v1.html(cargar_web(), height=1000, scrolling=True)
