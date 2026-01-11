@@ -3,9 +3,8 @@ import os
 from datetime import datetime
 
 # 1. CONFIGURACIÓN DE PÁGINA
-st.set_page_config(page_title="Los Vasos de Luli | Repostería Artesanal", layout="wide")
+st.set_page_config(page_title="Los Vasos de Luli | Repostería de Autor", layout="wide")
 
-# Ocultar menús de Streamlit
 st.markdown("""
     <style>
         #MainMenu {visibility: hidden;}
@@ -16,16 +15,17 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 2. DATOS DE LA EMPRESA
+# 2. DATOS
 INFO = {
     "nombre": "Los Vasos de Luli",
-    "ubicacion": "Repostería Artesanal",
+    "ubicacion": "Repostería Artesanal, Pacasmayo",
     "descripcion": "Transformamos ingredientes seleccionados en obras de arte comestibles. Especialistas en repostería fina de autor para momentos inolvidables.",
     "whatsapp": "51977905037",
     "instagram": "https://www.instagram.com/losvasosdeluli7/",
     "facebook": "https://www.facebook.com/profile.php?id=61568275415704",
-    "tiktok": "https://www.tiktok.com/@losvasitosdeluli7?fbclid=IwY2xjawPQn_5leHRuA2FlbQIxMABicmlkETFkUGF2aHdqM1V4a0gwMXJ0c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHh7Br_jKbR-eLmTiOeDiEEnvkY37IKpR4z5Ax2g7aZ86PEknNxQRPHg15i30_aem_3tTP-g9zBqMhGcVMaCZknw",
-    "mapa_link": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d791.4939023412573!2d-79.56447831518596!3d-7.402360599547372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjQnMDguNSJTIDc5wrAzMyc0OS43Ilc!5e0!3m2!1ses!2spe!4v1700000000000!5m2!1ses!2spe"
+    "tiktok": "https://www.tiktok.com/@losvasitosdeluli7",
+    "mapa_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d791.4939023412573!2d-79.56447831518596!3d-7.402360599547372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjQnMDguNSJTIDc5wrAzMyc0OS43Ilc!5e0!3m2!1ses!2spe!4v1700000000000!5m2!1ses!2spe",
+    "mapa_link": "https://www.google.com/maps/place/7%C2%B024'08.5%22S+79%C2%B033'49.7%22W/@-7.4023527,-79.5650227,293m/"
 }
 
 SERVICIOS = [
@@ -38,12 +38,12 @@ SERVICIOS = [
 ]
 
 TESTIMONIOS = [
-    {"nombre": "Valeria S.", "comentario": "La choco fresa fue el centro de atención en mi evento. ¡Increíble!"},
-    {"nombre": "Marco R.", "comentario": "El mejor postre que he probado. La presentación es impecable."},
-    {"nombre": "Empresa TechX", "comentario": "Nuestros clientes quedaron fascinados con los detalles."}
+    {"nombre": "VALERIA S.", "comentario": "La choco fresa fue el centro de atención en mi evento. ¡Increíble!"},
+    {"nombre": "MARCO R.", "comentario": "El mejor postre que he probado. La presentación es impecable."},
+    {"nombre": "EMPRESA TECHX", "comentario": "Nuestros clientes quedaron fascinados con los detalles."}
 ]
 
-# 3. LÓGICA DE RUTAS GITHUB
+# 3. RUTAS GITHUB
 USER = "Andrevalqui"
 REPO = "losvasosdeluli"
 BASE_URL = f"https://raw.githubusercontent.com/{USER}/{REPO}/main"
@@ -53,35 +53,45 @@ img_folder = "static/img"
 if os.path.exists(img_folder):
     for foto in os.listdir(img_folder):
         if foto.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
-            url_full = f"{BASE_URL}/static/img/{foto}"
-            gallery_html += f'''
-                <div class="swiper-slide">
-                    <div class="photo-frame shadow-sm">
-                        <img src="{url_full}" class="img-fluid w-100" style="height: 350px; object-fit: cover; border-radius: 8px;">
-                    </div>
-                </div>'''
+            url_f = f"{BASE_URL}/static/img/{foto}"
+            gallery_html += f'<div class="swiper-slide"><div class="photo-frame"><img src="{url_f}"></div></div>'
 
-# Ruta al video en GitHub
-video_path = f"{BASE_URL}/static/video/postres.mp4"
+video_url = f"{BASE_URL}/static/video/postres.mp4"
 
-# 4. PROCESAR EL HTML
+# 4. PROCESAR HTML
 def cargar_web():
     with open("templates/index.html", "r", encoding="utf-8") as f:
         html = f.read()
         
-        serv_html = "".join([f'<div class="col-md-4 col-6" data-aos="fade-up"><div class="service-card p-4 bg-white rounded shadow-sm h-100"><i class="fas {s["icono"]} fa-2x text-pink mb-3"></i><h6 class="text-uppercase small fw-bold" style="font-size:0.7rem; letter-spacing:1px;">{s["nombre"]}</h6></div></div>' for s in SERVICIOS])
-        test_html = "".join([f'<div class="col-md-4 mb-4" data-aos="fade-up"><div class="review-box p-4 border border-secondary rounded h-100"><div class="stars mb-2 text-warning">★★★★★</div><p class="fst-italic opacity-75 small">"{t["comentario"]}"</p><small class="text-uppercase text-pink fw-bold">{t["nombre"]}</small></div></div>' for t in TESTIMONIOS])
-        
+        # Inyectar servicios (Tarjetas blancas de la foto)
+        serv_html = "".join([f'''
+            <div class="col-md-4 col-6" data-aos="fade-up">
+                <div class="service-card shadow-sm">
+                    <i class="fas {s['icono']} mb-3"></i>
+                    <h6>{s['nombre']}</h6>
+                </div>
+            </div>''' for s in SERVICIOS])
+            
+        # Inyectar testimonios (Cajas oscuras de la foto)
+        test_html = "".join([f'''
+            <div class="col-md-4 mb-4" data-aos="fade-up">
+                <div class="review-box">
+                    <div class="stars mb-2">★★★★★</div>
+                    <p>"{t['comentario']}"</p>
+                    <div class="reviewer-name">{t['nombre']}</div>
+                </div>
+            </div>''' for t in TESTIMONIOS])
+
         html = html.replace("{{ servicios_items }}", serv_html)
         html = html.replace("{{ testimonios_items }}", test_html)
         html = html.replace("{{ gallery_content }}", gallery_html)
-        html = html.replace("{{ video_url }}", video_path)
+        html = html.replace("{{ video_url }}", video_url)
         
-        for clave, valor in INFO.items():
-            html = html.replace(f"{{{{ {clave} }}}}", str(valor))
+        for k, v in INFO.items():
+            html = html.replace(f"{{{{ {k} }}}}", str(v))
         
         html = html.replace("{{ anio }}", str(datetime.now().year))
         return html
 
-# 5. RENDER
-st.components.v1.html(cargar_web(), height=900, scrolling=True)
+# 5. RENDER (Altura de 100vh para que no se vea cortado)
+st.components.v1.html(cargar_web(), height=1000, scrolling=True)
