@@ -15,7 +15,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 2. DATOS
+# 2. DATOS (Igual a como los tenías)
 INFO = {
     "nombre": "Los Vasos de Luli",
     "ubicacion": "Repostería Artesanal",
@@ -26,34 +26,35 @@ INFO = {
     "tiktok": "https://www.tiktok.com/@losvasosdeluli7"
 }
 
-# 3. LÓGICA PARA CARGAR ARCHIVOS DE GITHUB
-# Reemplaza 'Andrevalqui' y 'losvasosdeluli' si cambian los nombres
-BASE_GITHUB = "https://raw.githubusercontent.com/Andrevalqui/losvasosdeluli/main"
+# 3. LÓGICA DE RUTAS GITHUB (Para que las fotos carguen en el servidor)
+# Reemplaza 'Andrevalqui' y 'losvasosdeluli' si tus nombres en GitHub son diferentes
+USER = "Andrevalqui"
+REPO = "losvasosdeluli"
+BASE_URL = f"https://raw.githubusercontent.com/{USER}/{REPO}/main"
 
-# Generar HTML de la galería dinámicamente
-gallery_html = ""
-img_path = "static/img"
-if os.path.exists(img_path):
-    archivos = os.listdir(img_path)
-    for foto in archivos:
+# Buscamos las fotos en tu carpeta static/img
+gallery_items = ""
+img_folder = "static/img"
+if os.path.exists(img_folder):
+    for foto in os.listdir(img_folder):
         if foto.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
-            url_foto = f"{BASE_GITHUB}/static/img/{foto}"
-            gallery_html += f'<div class="swiper-slide"><div class="photo-frame"><img src="{url_foto}"></div></div>'
+            url_full = f"{BASE_URL}/static/img/{foto}"
+            gallery_items += f'<div class="swiper-slide"><div class="photo-frame"><img src="{url_full}"></div></div>'
 
-# Link del video
-video_url = f"{BASE_GITHUB}/static/video/postres.mp4"
+# Buscamos el video
+video_final = f"{BASE_URL}/static/video/postres.mp4"
 
-# 4. CARGAR Y PROCESAR INDEX.HTML
-def cargar_index():
+# 4. CARGAR INDEX.HTML Y REEMPLAZAR VARIABLES
+def cargar_web():
     with open("templates/index.html", "r", encoding="utf-8") as f:
         html = f.read()
-        # Inyectar Galería y Video
-        html = html.replace("{{ gallery }}", gallery_html)
-        html = html.replace("{{ video_url }}", video_url)
-        # Inyectar INFO
+        # Inyectamos la galería y el video dinámico
+        html = html.replace("{{ gallery_content }}", gallery_items)
+        html = html.replace("{{ video_path }}", video_final)
+        # Inyectamos el resto de info
         for clave, valor in INFO.items():
             html = html.replace(f"{{{{ {clave} }}}}", str(valor))
         return html
 
-# 5. RENDER
-st.components.v1.html(cargar_index(), height=2200, scrolling=False)
+# 5. RENDER FINAL
+st.components.v1.html(cargar_web(), height=2500, scrolling=False)
