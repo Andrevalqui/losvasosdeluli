@@ -65,7 +65,7 @@ if os.path.exists(img_folder):
                 </div>'''
 
 # Video local
-video_path = f"{BASE_URL}/static/video/portada.mp4"
+video_path = f"{BASE_URL}/static/video/Portada.mp4"
 
 # 4. PROCESAR HTML
 def cargar_web():
@@ -87,3 +87,4 @@ def cargar_web():
         return html
 
 st.components.v1.html(cargar_web(), height=1000, scrolling=True)
+
