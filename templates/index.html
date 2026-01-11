@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
@@ -17,7 +18,7 @@
             --gold-arena: #d4a373;
         }
 
-        body { font-family: 'Poppins', sans-serif; color: var(--chocolate); background-color: var(--pink-soft); margin: 0; }
+        body { font-family: 'Poppins', sans-serif; color: var(--chocolate); background-color: var(--pink-soft); margin: 0; overflow-x: hidden; }
         h1, h2, h3 { font-family: 'Playfair Display', serif; text-transform: uppercase; letter-spacing: 2px; }
 
         .navbar { background: rgba(0, 0, 0, 0.9) !important; padding: 15px 0; }
@@ -61,7 +62,16 @@
         .splash-title { position: relative; font-family: 'Dancing Script', cursive; color: var(--pink-hot); font-size: 4rem; z-index: 2; }
         .splash-video { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0.35; z-index: 1; }
 
-        @media (max-width: 768px) { .hero-title { font-size: 3.5rem; } }
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3.2rem; }
+            .hero-subtitle { font-size: 0.7rem; letter-spacing: 3px; }
+            .section-padding { padding: 60px 0; }
+            .section-title { font-size: 1.8rem; }
+            .photo-frame img { height: 320px; }
+            .navbar-brand { font-size: 1rem; }
+            .social-btn { width: 42px; height: 42px; font-size: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -136,9 +146,9 @@
             <div class="mt-5" data-aos="zoom-in">
                 <h4 style="font-family: 'Dancing Script'; font-size: 3.5rem; color: var(--pink-hot); text-transform:none;">Síguenos</h4>
                 <div class="d-flex justify-content-center gap-3 flex-wrap">
-                    <a href="{{ instagram }}" target="_blank" class="btn-marketing"><i class="fab fa-instagram me-2"></i> Instagram</a>
-                    <a href="{{ facebook }}" target="_blank" class="btn-marketing" style="background:#1877F2;"><i class="fab fa-facebook-f me-2"></i> Facebook</a>
-                    <a href="{{ tiktok }}" target="_blank" class="btn-marketing" style="background:#000;"><i class="fab fa-tiktok me-2"></i> TikTok</a>
+                    <a href="{{ instagram }}" target="_blank" class="btn btn-marketing"><i class="fab fa-instagram me-2"></i> Instagram</a>
+                    <a href="{{ facebook }}" target="_blank" class="btn btn-marketing" style="background:#1877F2;"><i class="fab fa-facebook-f me-2"></i> Facebook</a>
+                    <a href="{{ tiktok }}" target="_blank" class="btn btn-marketing" style="background:#000;"><i class="fab fa-tiktok me-2"></i> TikTok</a>
                 </div>
             </div>
         </div>
@@ -168,11 +178,9 @@
             if (element) { element.scrollIntoView({ behavior: 'smooth' }); }
         }
         document.addEventListener('DOMContentLoaded', () => {
-            // Aseguramos que el video intente reproducirse
             const v1 = document.getElementById('video-splash');
             const v2 = document.getElementById('video-hero');
             if(v1) v1.play(); if(v2) v2.play();
-
             setTimeout(() => { document.getElementById('splash').classList.add('splash-hidden'); }, 2500);
         });
         AOS.init({ duration: 1000, once: true });
