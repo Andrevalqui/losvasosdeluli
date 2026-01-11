@@ -15,7 +15,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 2. DATOS (Mantenemos tus links originales)
+# 2. DATOS
 INFO = {
     "nombre": "Los Vasos de Luli",
     "ubicacion": "Repostería Artesanal, Pacasmayo",
@@ -54,9 +54,17 @@ if os.path.exists(img_folder):
     for foto in os.listdir(img_folder):
         if foto.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
             url_f = f"{BASE_URL}/static/img/{foto}"
-            gallery_html += f'<div class="swiper-slide"><div class="photo-frame"><img src="{url_f}"></div></div>'
+            # MEJORA: Añadimos el enlace para que GLightbox lo detecte
+            gallery_html += f'''
+                <div class="swiper-slide">
+                    <div class="photo-frame shadow-sm">
+                        <a href="{url_f}" class="glightbox">
+                            <img src="{url_f}" class="img-fluid w-100" style="height: 450px; object-fit: cover; border-radius: 10px; cursor: zoom-in;">
+                        </a>
+                    </div>
+                </div>'''
 
-# Cargamos tu video local
+# Video local
 video_path = f"{BASE_URL}/static/video/portada.mp4"
 
 # 4. PROCESAR HTML
@@ -64,8 +72,8 @@ def cargar_web():
     with open("templates/index.html", "r", encoding="utf-8") as f:
         html = f.read()
         
-        serv_html = "".join([f'<div class="col-md-4 col-6" data-aos="fade-up"><div class="service-card shadow-sm"><i class="fas {s["icono"]} mb-3" style="color:#4e2c1c"></i><h6>{s["nombre"]}</h6></div></div>' for s in SERVICIOS])
-        test_html = "".join([f'<div class="col-md-4 mb-4" data-aos="fade-up"><div class="review-box"><div class="stars mb-2" style="color:#e62e84">★★★★★</div><p>"{t["comentario"]}"</p><div class="reviewer-name" style="color:#e62e84">{t["nombre"]}</div></div></div>' for t in TESTIMONIOS])
+        serv_html = "".join([f'<div class="col-md-4 col-6" data-aos="fade-up"><div class="service-card shadow-sm"><i class="fas {s["icono"]} mb-3" style="color:#d4a373"></i><h6>{s["nombre"]}</h6></div></div>' for s in SERVICIOS])
+        test_html = "".join([f'<div class="col-md-4 mb-4" data-aos="fade-up"><div class="review-box"><div class="stars mb-2" style="color:#d4a373">★★★★★</div><p>"{t["comentario"]}"</p><div class="reviewer-name" style="color:#d4a373">{t["nombre"]}</div></div></div>' for t in TESTIMONIOS])
 
         html = html.replace("{{ servicios_items }}", serv_html)
         html = html.replace("{{ testimonios_items }}", test_html)
