@@ -63,7 +63,6 @@ if os.path.exists(img_folder):
                     </div>
                 </div>'''
 
-# Cargamos tu video local con la extensión correcta
 video_path = f"{BASE_URL}/static/video/portada.mp4"
 
 # 4. PROCESAR HTML
