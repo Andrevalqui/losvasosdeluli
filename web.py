@@ -25,7 +25,7 @@ INFO = {
     "instagram": "https://www.instagram.com/losvasosdeluli7/",
     "facebook": "https://www.facebook.com/profile.php?id=61568275415704",
     "tiktok": "https://www.tiktok.com/@losvasitosdeluli7?fbclid=IwY2xjawPQn_5leHRuA2FlbQIxMABicmlkETFkUGF2aHdqM1V4a0gwMXJ0c3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHh7Br_jKbR-eLmTiOeDiEEnvkY37IKpR4z5Ax2g7aZ86PEknNxQRPHg15i30_aem_3tTP-g9zBqMhGcVMaCZknw",
-    "mapa_link": "https://www.google.com/maps/place/7%C2%B024'08.5%22S+79%C2%B033'49.7%22W/@-7.4023527,-79.5650227,293m/data=!3m2!1e3!4b1!4m13!1m8!3m7!1s0x904d45fe8962dfed:0x2caf4707de428b8b!2sRicardo+Palma,+Pacasmayo+13811!3b1!8m2!3d-7.4067399!4d-79.5660042!16s%2Fg%2F11f1n453bq!3m3!8m2!3d-7.402354!4d-79.563805?entry=ttu&g_ep=EgoyMDI2MDEwNy4wIKXMDSoASAFQAw%3D%3D"
+    "mapa_link": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d791.4939023412573!2d-79.56447831518596!3d-7.402360599547372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjQnMDguNSJTIDc5wrAzMyc0OS43Ilc!5e0!3m2!1ses!2spe!4v1700000000000!5m2!1ses!2spe"
 }
 
 SERVICIOS = [
@@ -57,12 +57,11 @@ if os.path.exists(img_folder):
             gallery_html += f'''
                 <div class="swiper-slide">
                     <div class="photo-frame shadow-sm">
-                        <a href="{url_full}" class="glightbox">
-                            <img src="{url_full}" class="img-fluid w-100" style="height: 350px; object-fit: cover; border-radius: 8px;">
-                        </a>
+                        <img src="{url_full}" class="img-fluid w-100" style="height: 350px; object-fit: cover; border-radius: 8px;">
                     </div>
                 </div>'''
 
+# Ruta al video en GitHub
 video_path = f"{BASE_URL}/static/video/postres.mp4"
 
 # 4. PROCESAR EL HTML
