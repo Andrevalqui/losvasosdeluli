@@ -79,4 +79,3 @@ def cargar_web():
         return html
 
 st.components.v1.html(cargar_web(), height=1000, scrolling=True)
-
