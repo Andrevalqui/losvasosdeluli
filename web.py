@@ -54,7 +54,6 @@ if os.path.exists(img_folder):
     for foto in os.listdir(img_folder):
         if foto.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
             url_f = f"{BASE_URL}/static/img/{foto}"
-            # MEJORA: Envolvemos la imagen en un <a> con la clase glightbox para activar el Zoom
             gallery_html += f'''
                 <div class="swiper-slide">
                     <div class="photo-frame shadow-sm">
@@ -64,7 +63,7 @@ if os.path.exists(img_folder):
                     </div>
                 </div>'''
 
-# Cargamos tu video local
+# Cargamos tu video local con la extensión correcta
 video_path = f"{BASE_URL}/static/video/portada.mp4"
 
 # 4. PROCESAR HTML
