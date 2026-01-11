@@ -4,7 +4,7 @@ import os
 # 1. CONFIGURACIÓN DE PÁGINA
 st.set_page_config(page_title="Los Vasos de Luli | Repostería", layout="wide")
 
-# Ocultar menús de Streamlit para acabado profesional
+# Ocultar menús de Streamlit
 st.markdown("""
     <style>
         #MainMenu {visibility: hidden;}
@@ -15,7 +15,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 2. DATOS DE LA EMPRESA
+# 2. DATOS
 INFO = {
     "nombre": "Los Vasos de Luli",
     "ubicacion": "Repostería Artesanal",
@@ -23,20 +23,37 @@ INFO = {
     "whatsapp": "51977905037",
     "instagram": "https://www.instagram.com/losvasosdeluli7/",
     "facebook": "https://www.facebook.com/profile.php?id=61568275415704",
-    "tiktok": "https://www.tiktok.com/@losvasitosdeluli7?fbclid=IwY2xjawPQnldleHRuA2FlbQIxMABicmlkETFPd3ZFM2JNN3dHSTZZWjBQc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHm5uUqWN0jxBygcGWxXuy6aLmcVpomJr89tDItB2lp-9EK8Iby1DOUij_7Zh_aem_PxVxW-BI4eFRJ0Q-Qpq-rQ"
+    "tiktok": "https://www.tiktok.com/@losvasosdeluli7"
 }
 
-# 3. FUNCIÓN PARA CARGAR EL HTML
-def cargar_diseño(ruta):
-    if os.path.exists(ruta):
-        with open(ruta, 'r', encoding='utf-8') as f:
-            html = f.read()
-            # Reemplazo de variables manual (estilo Flask)
-            for clave, valor in INFO.items():
-                html = html.replace(f"{{{{ {clave} }}}}", str(valor))
-            return html
-    return "<h1>Error: No se encontró el archivo index.html</h1>"
+# 3. LÓGICA PARA CARGAR ARCHIVOS DE GITHUB
+# Reemplaza 'Andrevalqui' y 'losvasosdeluli' si cambian los nombres
+BASE_GITHUB = "https://raw.githubusercontent.com/Andrevalqui/losvasosdeluli/main"
 
-# 4. RENDERIZAR
-diseño_final = cargar_diseño("index.html")
-st.components.v1.html(diseño_final, height=2000, scrolling=False)
+# Generar HTML de la galería dinámicamente
+gallery_html = ""
+img_path = "static/img"
+if os.path.exists(img_path):
+    archivos = os.listdir(img_path)
+    for foto in archivos:
+        if foto.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
+            url_foto = f"{BASE_GITHUB}/static/img/{foto}"
+            gallery_html += f'<div class="swiper-slide"><div class="photo-frame"><img src="{url_foto}"></div></div>'
+
+# Link del video
+video_url = f"{BASE_GITHUB}/static/video/postres.mp4"
+
+# 4. CARGAR Y PROCESAR INDEX.HTML
+def cargar_index():
+    with open("templates/index.html", "r", encoding="utf-8") as f:
+        html = f.read()
+        # Inyectar Galería y Video
+        html = html.replace("{{ gallery }}", gallery_html)
+        html = html.replace("{{ video_url }}", video_url)
+        # Inyectar INFO
+        for clave, valor in INFO.items():
+            html = html.replace(f"{{{{ {clave} }}}}", str(valor))
+        return html
+
+# 5. RENDER
+st.components.v1.html(cargar_index(), height=2200, scrolling=False)
