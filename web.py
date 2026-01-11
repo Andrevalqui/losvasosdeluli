@@ -15,7 +15,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 2. DATOS
+# 2. DATOS (Mantenemos tus links originales)
 INFO = {
     "nombre": "Los Vasos de Luli",
     "ubicacion": "Repostería Artesanal, Pacasmayo",
@@ -54,17 +54,17 @@ if os.path.exists(img_folder):
     for foto in os.listdir(img_folder):
         if foto.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
             url_f = f"{BASE_URL}/static/img/{foto}"
-            # MEJORA: Añadimos el enlace para que GLightbox lo detecte
+            # MEJORA: Envolvemos la imagen en un <a> con la clase glightbox para activar el Zoom
             gallery_html += f'''
                 <div class="swiper-slide">
                     <div class="photo-frame shadow-sm">
                         <a href="{url_f}" class="glightbox">
-                            <img src="{url_f}" class="img-fluid w-100" style="height: 450px; object-fit: cover; border-radius: 10px; cursor: zoom-in;">
+                            <img src="{url_f}" style="width:100%; height:450px; object-fit:cover; border-radius:10px; cursor:zoom-in;">
                         </a>
                     </div>
                 </div>'''
 
-# Video local
+# Cargamos tu video local
 video_path = f"{BASE_URL}/static/video/portada.mp4"
 
 # 4. PROCESAR HTML
